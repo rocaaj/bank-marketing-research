@@ -1,2 +1,2 @@
-# netflix-marketing-research
+# bank-marketing-research
 final project for dsba_6727
