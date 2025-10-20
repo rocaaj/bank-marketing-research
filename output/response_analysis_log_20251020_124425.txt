@@ -1,0 +1,98 @@
+=== Bank Marketing Response Analysis ===
+Analysis started at: 2025-10-20 12:44:25
+Log file: output/response_analysis_log_20251020_124425.txt
+==================================================
+
+
+🔄 Loading dataset from: data/bank-full-processed.csv
+✅ Loaded dataset: 45211 rows, 37 columns
+
+🔄 Splitting data (test_size=0.2, random_state=42)...
+✅ Data split complete - Train: (36168, 36), Test: (9043, 36)
+📊 Target distribution in training set: {0: 31937, 1: 4231}
+
+🔄 Evaluating Logistic Regression model...
+
+===== Logistic Regression Predictive Performance =====
+Accuracy: 0.883
+              precision    recall  f1-score   support
+
+           0       0.89      0.99      0.94      7985
+           1       0.51      0.09      0.15      1058
+
+    accuracy                           0.88      9043
+   macro avg       0.70      0.54      0.54      9043
+weighted avg       0.85      0.88      0.85      9043
+
+Saved confusion matrix plot: logistic_regression_confusion_matrix.png
+
+Logistic Regression Coefficient Summary (p-values):
+           Feature  Coefficient   StdErr     z-value       p-value  OddsRatio
+         Intercept    -2.357807 0.021615 -109.082663  0.000000e+00   0.094628
+   contact_unknown    -0.703126 0.030646  -22.943629 1.705900e-116   0.495035
+       housing_yes    -0.284052 0.020611  -13.781483  3.294337e-43   0.752728
+         month_aug    -0.290440 0.025934  -11.199335  4.108075e-29   0.747934
+         month_nov    -0.239092 0.022781  -10.495392  9.070008e-26   0.787343
+          campaign    -0.299998 0.029465  -10.181580  2.396394e-24   0.740820
+         month_jul    -0.262086 0.026116  -10.035388  1.065400e-23   0.769445
+         month_mar     0.115395 0.012263    9.409704  4.975376e-21   1.122317
+         month_jan    -0.182466 0.020088   -9.083554  1.050859e-19   0.833213
+         month_sep     0.105473 0.012720    8.291844  1.115061e-16   1.111236
+         month_oct     0.105968 0.013049    8.121023  4.622716e-16   1.111787
+          loan_yes    -0.161652 0.021281   -7.596167  3.050306e-14   0.850737
+         month_may    -0.185271 0.031851   -5.816761  5.999866e-09   0.830879
+         month_dec     0.066903 0.011507    5.814351  6.086950e-09   1.069192
+education_tertiary     0.166489 0.032804    5.075272  3.869415e-07   1.181150
+Saved SHAP summary plot: logistic_regression_shap_summary.png
+
+🔄 Running 5-fold cross-validation for Logistic Regression...
+✅ Logistic Regression Cross-Validation (5-fold):
+Mean Accuracy: 0.883 ± 0.002
+
+🔄 Evaluating Decision Tree model...
+
+===== Decision Tree Predictive Performance =====
+Accuracy: 0.884
+              precision    recall  f1-score   support
+
+           0       0.89      0.99      0.94      7985
+           1       0.52      0.10      0.16      1058
+
+    accuracy                           0.88      9043
+   macro avg       0.71      0.54      0.55      9043
+weighted avg       0.85      0.88      0.85      9043
+
+Saved confusion matrix plot: decision_tree_confusion_matrix.png
+
+Decision Tree Top Features:
+        Feature  Importance
+            age    0.274714
+contact_unknown    0.198986
+      month_jun    0.153475
+      month_oct    0.149622
+      month_sep    0.141476
+            day    0.040007
+      month_aug    0.008624
+       campaign    0.005992
+        balance    0.005243
+marital_married    0.004532
+Saved feature importance plot: decision_tree_feature_importance.png
+Saved SHAP summary plot: decision_tree_shap_summary.png
+
+🔄 Running 5-fold cross-validation for Decision Tree...
+✅ Decision Tree Cross-Validation (5-fold):
+Mean Accuracy: 0.882 ± 0.002
+
+All results saved in /Users/anthonyroca/uncc/dsba_6276/final_project/bank-marketing-research/output
+Saved plots:
+  - logistic_regression_confusion_matrix.png
+  - decision_tree_confusion_matrix.png
+  - logistic_regression_shap_summary.png
+  - decision_tree_shap_summary.png
+  - decision_tree_feature_importance.png
+Saved data:
+  - logistic_significance.csv
+  - tree_importances.csv
+  - response_analysis_log_20251020_124425.txt
+
+Analysis completed at: 2025-10-20 12:44:47
