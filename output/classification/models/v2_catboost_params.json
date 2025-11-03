@@ -1,0 +1,11 @@
+{
+  "iterations": 621,
+  "learning_rate": 0.02731957878539486,
+  "depth": 5,
+  "l2_leaf_reg": 8.982186731175817,
+  "subsample": 0.820420408958373,
+  "scale_pos_weight": 7.548333727251241,
+  "loss_function": "Logloss",
+  "random_seed": 42,
+  "verbose": false
+}

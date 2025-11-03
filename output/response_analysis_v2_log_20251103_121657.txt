@@ -1,0 +1,118 @@
+======================================================================
+Bank Marketing Response Analysis v2 - Supervised Lead Scoring
+======================================================================
+Started at: 2025-11-03 12:16:57
+Log file: /Users/anthonyroca/uncc/dsba_6276/final_project/bank-marketing-research/output/response_analysis_v2_log_20251103_121657.txt
+Random State: 42 | CV Folds: 5
+Hyperparameter Tuning: DISABLED (Trials: N/A)
+======================================================================
+
+🔄 Loading dataset from: /Users/anthonyroca/uncc/dsba_6276/final_project/bank-marketing-research/data/bank-full-processed-v2.csv
+✅ Loaded dataset: 45211 rows, 114 columns
+
+🔄 Stratified split (test_size=0.2, random_state=42)...
+✅ Split complete - Train: (36168, 113), Test: (9043, 113)
+📊 Train target distribution: {0: 31937, 1: 4231}
+
+======================================================================
+1. LOGISTIC REGRESSION (Elastic Net)
+======================================================================
+
+===== Logistic Regression (EN) - Metrics =====
+ROC-AUC: 0.9133 | PR-AUC: 0.5389
+Precision@5%: 0.6549 | Precision@10%: 0.5940 | Precision@20%: 0.4530
+Lift@10%: 5.08x
+
+📊 Threshold Optimization Summary:
+   Max ROI threshold: 0.050 (ROI: $96480.00)
+   Max Precision threshold: 0.638 (Precision: 0.669)
+   ~10% contacts threshold: 0.436
+
+🔍 Computing SHAP values for Logistic Regression...
+⚠️  Error computing SHAP for Logistic Regression: property 'feature_names_in_' of 'Pipeline' object has no setter
+💾 Saved model: /Users/anthonyroca/uncc/dsba_6276/final_project/bank-marketing-research/output/classification/models/v2_logistic_model.pkl
+
+======================================================================
+2. LIGHTGBM
+======================================================================
+
+⏭️  Skipping LightGBM tuning (ENABLE_TUNING=False). Using default parameters.
+
+===== LightGBM - Metrics =====
+ROC-AUC: 0.9338 | PR-AUC: 0.6275
+Precision@5%: 0.7035 | Precision@10%: 0.6272 | Precision@20%: 0.4867
+Lift@10%: 5.36x
+
+📊 Threshold Optimization Summary:
+   Max ROI threshold: 0.050 (ROI: $98537.00)
+   Max Precision threshold: 0.803 (Precision: 0.857)
+   ~10% contacts threshold: 0.472
+
+🔍 Computing SHAP values for LightGBM...
+✅ SHAP analysis complete for LightGBM
+💾 Saved model: /Users/anthonyroca/uncc/dsba_6276/final_project/bank-marketing-research/output/classification/models/v2_lightgbm_model.pkl
+
+======================================================================
+3. XGBOOST
+======================================================================
+
+⏭️  Skipping XGBoost tuning (ENABLE_TUNING=False). Using default parameters.
+
+===== XGBoost - Metrics =====
+ROC-AUC: 0.9312 | PR-AUC: 0.6118
+Precision@5%: 0.7080 | Precision@10%: 0.6239 | Precision@20%: 0.4801
+Lift@10%: 5.33x
+
+📊 Threshold Optimization Summary:
+   Max ROI threshold: 0.050 (ROI: $98098.00)
+   Max Precision threshold: 0.748 (Precision: 0.805)
+   ~10% contacts threshold: 0.472
+
+🔍 Computing SHAP values for XGBoost...
+⚠️  Error computing SHAP for XGBoost: could not convert string to float: '[5E-1]'
+💾 Saved model: /Users/anthonyroca/uncc/dsba_6276/final_project/bank-marketing-research/output/classification/models/v2_xgboost_model.pkl
+
+======================================================================
+4. CATBOOST
+======================================================================
+
+⏭️  Skipping CatBoost tuning (ENABLE_TUNING=False). Using default parameters.
+
+===== CatBoost - Metrics =====
+ROC-AUC: 0.9327 | PR-AUC: 0.6228
+Precision@5%: 0.7168 | Precision@10%: 0.6394 | Precision@20%: 0.4801
+Lift@10%: 5.46x
+
+📊 Threshold Optimization Summary:
+   Max ROI threshold: 0.050 (ROI: $98092.00)
+   Max Precision threshold: 0.821 (Precision: 0.833)
+   ~10% contacts threshold: 0.472
+
+🔍 Computing SHAP values for CatBoost...
+✅ SHAP analysis complete for CatBoost
+💾 Saved model: /Users/anthonyroca/uncc/dsba_6276/final_project/bank-marketing-research/output/classification/models/v2_catboost_model.pkl
+
+======================================================================
+5. MODEL COMPARISON & SUMMARY
+======================================================================
+
+======================================================================
+MODEL COMPARISON (sorted by ROC-AUC)
+======================================================================
+                   Model  ROC-AUC   PR-AUC  Precision@5%  Precision@10%  Precision@20%  Lift@10%    Brier
+                LightGBM 0.933842 0.627521      0.703540       0.627212       0.486726  5.360947 0.061887
+                CatBoost 0.932694 0.622823      0.716814       0.639381       0.480088  5.464951 0.062134
+                 XGBoost 0.931159 0.611850      0.707965       0.623894       0.480088  5.332582 0.062713
+Logistic Regression (EN) 0.913349 0.538899      0.654867       0.594027       0.452987  5.077299 0.068222
+
+======================================================================
+ANALYSIS COMPLETE
+======================================================================
+
+All artifacts saved under: /Users/anthonyroca/uncc/dsba_6276/final_project/bank-marketing-research/output/classification
+
+Models saved in: /Users/anthonyroca/uncc/dsba_6276/final_project/bank-marketing-research/output/classification/models
+
+Best model: LightGBM (ROC-AUC: 0.9338)
+
+Completed at: 2025-11-03 12:18:59

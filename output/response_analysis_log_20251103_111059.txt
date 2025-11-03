@@ -1,0 +1,314 @@
+=== Bank Marketing Response Analysis ===
+Analysis started at: 2025-11-03 11:10:59
+Log file: /Users/anthonyroca/uncc/dsba_6276/final_project/bank-marketing-research/output/response_analysis_log_20251103_111059.txt
+==================================================
+
+
+🔄 Loading dataset from: /Users/anthonyroca/uncc/dsba_6276/final_project/bank-marketing-research/data/bank-full-processed.csv
+✅ Loaded dataset: 45211 rows, 37 columns
+
+============================================================
+PART 1: CLASSIFICATION MODELS (Stratified Split)
+============================================================
+
+🔄 Splitting data (stratified, test_size=0.2, random_state=42)...
+✅ Data split complete - Train: (36168, 36), Test: (9043, 36)
+📊 Target distribution in training set: {0: 31937, 1: 4231}
+📊 Target distribution in test set: {0: 7985, 1: 1058}
+
+🔄 Evaluating Logistic Regression model (classification)...
+
+===== Logistic Regression Predictive Performance =====
+Accuracy: 0.883
+              precision    recall  f1-score   support
+
+           0       0.89      0.99      0.94      7985
+           1       0.51      0.09      0.15      1058
+
+    accuracy                           0.88      9043
+   macro avg       0.70      0.54      0.54      9043
+weighted avg       0.85      0.88      0.85      9043
+
+Saved confusion matrix plot: logistic_regression_confusion_matrix.png
+
+Logistic Regression Coefficient Summary (p-values):
+           Feature  Coefficient   StdErr     z-value       p-value  OddsRatio
+         Intercept    -2.357807 0.021615 -109.082663  0.000000e+00   0.094628
+   contact_unknown    -0.703126 0.030646  -22.943629 1.705900e-116   0.495035
+       housing_yes    -0.284052 0.020611  -13.781483  3.294337e-43   0.752728
+         month_aug    -0.290440 0.025934  -11.199335  4.108075e-29   0.747934
+         month_nov    -0.239092 0.022781  -10.495392  9.070008e-26   0.787343
+          campaign    -0.299998 0.029465  -10.181580  2.396394e-24   0.740820
+         month_jul    -0.262086 0.026116  -10.035388  1.065400e-23   0.769445
+         month_mar     0.115395 0.012263    9.409704  4.975376e-21   1.122317
+         month_jan    -0.182466 0.020088   -9.083554  1.050859e-19   0.833213
+         month_sep     0.105473 0.012720    8.291844  1.115061e-16   1.111236
+         month_oct     0.105968 0.013049    8.121023  4.622716e-16   1.111787
+          loan_yes    -0.161652 0.021281   -7.596167  3.050306e-14   0.850737
+         month_may    -0.185271 0.031851   -5.816761  5.999866e-09   0.830879
+         month_dec     0.066903 0.011507    5.814351  6.086950e-09   1.069192
+education_tertiary     0.166489 0.032804    5.075272  3.869415e-07   1.181150
+Saved SHAP summary plot: logistic_regression_shap_summary.png
+
+🔄 Running 5-fold cross-validation for Logistic Regression...
+✅ Logistic Regression Cross-Validation (5-fold):
+Mean Accuracy: 0.883 ± 0.002
+
+🔄 Evaluating Logistic Regression ROC-AUC...
+✅ Logistic Regression ROC-AUC: 0.7521
+✅ Logistic Regression PR-AUC: 0.3341
+
+🔄 Evaluating Decision Tree model (classification)...
+
+===== Decision Tree Predictive Performance =====
+Accuracy: 0.884
+              precision    recall  f1-score   support
+
+           0       0.89      0.99      0.94      7985
+           1       0.52      0.10      0.16      1058
+
+    accuracy                           0.88      9043
+   macro avg       0.71      0.54      0.55      9043
+weighted avg       0.85      0.88      0.85      9043
+
+Saved confusion matrix plot: decision_tree_confusion_matrix.png
+
+Decision Tree Top Features:
+        Feature  Importance
+            age    0.274714
+contact_unknown    0.198986
+      month_jun    0.153475
+      month_oct    0.149622
+      month_sep    0.141476
+            day    0.040007
+      month_aug    0.008624
+       campaign    0.005992
+        balance    0.005243
+marital_married    0.004532
+Saved feature importance plot: decision_tree_feature_importance.png
+Saved SHAP summary plot: decision_tree_shap_summary.png
+
+🔄 Running 5-fold cross-validation for Decision Tree...
+✅ Decision Tree Cross-Validation (5-fold):
+Mean Accuracy: 0.882 ± 0.002
+
+🔄 Evaluating Decision Tree ROC-AUC...
+✅ Decision Tree ROC-AUC: 0.6748
+✅ Decision Tree PR-AUC: 0.3285
+
+============================================================
+PART 2: ANOMALY DETECTION MODELS (Random Split)
+============================================================
+
+🔄 Splitting data (random, test_size=0.2, random_state=42)...
+✅ Data split complete - Train: (36168, 36), Test: (9043, 36)
+📊 Target distribution in training set: {0: 31970, 1: 4198}
+📊 Target distribution in test set: {0: 7952, 1: 1091}
+
+📊 Training anomaly detectors on majority class (non-subscribers):
+   Majority class samples: 31970
+   Minority class samples: 4198
+
+🔄 Training Isolation Forest on majority class (31970 samples)...
+✅ Isolation Forest trained
+
+🔄 Computing SHAP values for Isolation Forest...
+Saved SHAP summary plot: isolation_forest_shap_summary.png
+
+🔄 Evaluating Isolation Forest ROC-AUC...
+✅ Isolation Forest ROC-AUC: 0.5461
+✅ Isolation Forest PR-AUC: 0.1397
+
+🔄 Training One-Class SVM on majority class (31970 samples)...
+✅ One-Class SVM trained
+
+🔄 Evaluating One-Class SVM ROC-AUC...
+✅ One-Class SVM ROC-AUC: 0.5867
+✅ One-Class SVM PR-AUC: 0.1940
+
+🔄 Training Local Outlier Factor on majority class (31970 samples)...
+✅ Local Outlier Factor trained
+
+🔄 Evaluating Local Outlier Factor ROC-AUC...
+✅ Local Outlier Factor ROC-AUC: 0.5440
+✅ Local Outlier Factor PR-AUC: 0.1414
+
+============================================================
+PART 3: BASELINE COMPARISON
+============================================================
+
+🔄 Evaluating Random Classifier baseline (positive_class_prob=0.117)...
+✅ Random Classifier ROC-AUC: 0.5080
+✅ Random Classifier PR-AUC: 0.1221
+
+============================================================
+PART 4: MODEL COMPARISON
+============================================================
+
+============================================================
+MODEL COMPARISON SUMMARY (sorted by ROC-AUC)
+============================================================
+               Model  ROC-AUC   PR-AUC
+ Logistic Regression 0.752058 0.334143
+       Decision Tree 0.674820 0.328533
+       One-Class SVM 0.586727 0.193996
+    Isolation Forest 0.546090 0.139665
+Local Outlier Factor 0.544015 0.141448
+   Random Classifier 0.508038 0.122075
+============================================================
+
+Saved comparison table: /Users/anthonyroca/uncc/dsba_6276/final_project/bank-marketing-research/output/anomaly_detection/model_comparison.csv
+Saved ROC curves comparison: /Users/anthonyroca/uncc/dsba_6276/final_project/bank-marketing-research/output/anomaly_detection/roc_curves_comparison.png
+
+============================================================
+PART 5: MODEL INTERPRETATION COMPARISON
+============================================================
+
+======================================================================
+COMPARATIVE INTERPRETATION: Logistic Regression vs Isolation Forest
+======================================================================
+
+📊 Top 15 Features by Model:
+   Logistic Regression: 15 features
+   Isolation Forest: 15 features
+   Agreement (in both top 15): 8 features
+
+✅ Features both models agree on (top 15):
+   • contact_unknown
+     LR: Coef=-0.7031, p=0.0000, OddsRatio=0.495
+     IF: SHAP Importance=0.2016
+   • month_aug
+     LR: Coef=-0.2904, p=0.0000, OddsRatio=0.748
+     IF: SHAP Importance=0.1960
+   • month_jul
+     LR: Coef=-0.2621, p=0.0000, OddsRatio=0.769
+     IF: SHAP Importance=0.2452
+   • month_jun
+     LR: Coef=0.1006, p=0.0005, OddsRatio=1.106
+     IF: SHAP Importance=0.2017
+   • marital_married
+     LR: Coef=-0.1024, p=0.0002, OddsRatio=0.903
+     IF: SHAP Importance=0.1397
+   • month_nov
+     LR: Coef=-0.2391, p=0.0000, OddsRatio=0.787
+     IF: SHAP Importance=0.1655
+   • loan_yes
+     LR: Coef=-0.1617, p=0.0000, OddsRatio=0.851
+     IF: SHAP Importance=0.2863
+   • education_tertiary
+     LR: Coef=0.1665, p=0.0000, OddsRatio=1.181
+     IF: SHAP Importance=0.1774
+
+📈 Features prioritized by Logistic Regression only (top 15):
+   • housing_yes***: Coef=-0.2841, p=0.0000
+   • campaign***: Coef=-0.3000, p=0.0000
+   • month_oct***: Coef=0.1060, p=0.0000
+   • month_mar***: Coef=0.1154, p=0.0000
+   • month_jan***: Coef=-0.1825, p=0.0000
+   • month_may***: Coef=-0.1853, p=0.0000
+   • month_sep***: Coef=0.1055, p=0.0000
+
+🔍 Features prioritized by Isolation Forest only (top 15):
+   • job_blue-collar: SHAP Importance=0.2086
+   • marital_single: SHAP Importance=0.1601
+   • job_management: SHAP Importance=0.1876
+   • contact_telephone: SHAP Importance=0.1472
+   • job_technician: SHAP Importance=0.2893
+   • month_feb: SHAP Importance=0.1612
+   • job_services: SHAP Importance=0.1367
+
+📊 Statistically Significant Features (p < 0.05): 25
+   Top 10 significant predictors:
+   • contact_unknown: decreases odds by 0.703 (OR=0.495, p=0.0000)
+   • campaign: decreases odds by 0.300 (OR=0.741, p=0.0000)
+   • month_aug: decreases odds by 0.290 (OR=0.748, p=0.0000)
+   • housing_yes: decreases odds by 0.284 (OR=0.753, p=0.0000)
+   • month_jul: decreases odds by 0.262 (OR=0.769, p=0.0000)
+   • month_nov: decreases odds by 0.239 (OR=0.787, p=0.0000)
+   • month_may: decreases odds by 0.185 (OR=0.831, p=0.0000)
+   • month_jan: decreases odds by 0.182 (OR=0.833, p=0.0000)
+   • education_tertiary: increases odds by 0.166 (OR=1.181, p=0.0000)
+   • loan_yes: decreases odds by 0.162 (OR=0.851, p=0.0000)
+
+✅ Saved comparison visualization: /Users/anthonyroca/uncc/dsba_6276/final_project/bank-marketing-research/output/anomaly_detection/logistic_vs_isolation_forest_comparison.png
+✅ Saved comparison table: /Users/anthonyroca/uncc/dsba_6276/final_project/bank-marketing-research/output/anomaly_detection/logistic_vs_isolation_forest_comparison.csv
+
+================================================================================
+MODEL COMPARISON INTERPRETATION: Logistic Regression vs Isolation Forest
+================================================================================
+
+EXECUTIVE SUMMARY:
+------------------
+Logistic Regression (ROC-AUC: ~0.75) significantly outperforms Isolation Forest 
+(ROC-AUC: ~0.55) because subscribers represent a distinct, learnable class with 
+systematic patterns, not random anomalies.
+
+KEY FINDINGS:
+-------------
+1. CLASS NATURE: Subscribers (11.7% of data) form a distinct minority class with
+   learnable patterns, not random outliers. This explains why supervised learning
+   (Logistic Regression) outperforms unsupervised anomaly detection.
+
+2. FEATURE AGREEMENT: 8 features appear in top 15 of both models,
+   indicating some consensus on what distinguishes subscribers from non-subscribers.
+
+3. STATISTICAL SIGNIFICANCE: 25 features have statistically significant
+   coefficients (p < 0.05) in Logistic Regression, providing evidence-based insights
+   into subscription predictors.
+
+4. MODEL DIFFERENCES:
+   • Logistic Regression: Identifies statistically significant predictors with 
+     interpretable odds ratios. Captures systematic relationships learned from
+     labeled data.
+   • Isolation Forest: Identifies features that make subscribers "stand out" from
+     the majority class. Captures deviation patterns without explicit labels.
+
+INTERPRETATION FOR BUSINESS:
+----------------------------
+• Use Logistic Regression for actionable insights: Which customer characteristics
+  and campaign strategies statistically predict subscription? (p-values, odds ratios)
+  
+• Use Isolation Forest for exploratory insights: What makes subscribers different
+  from typical customers? (SHAP feature contributions)
+
+• Both models can inform targeting strategies, but Logistic Regression provides
+  stronger, statistically validated evidence for decision-making.
+
+METHODOLOGICAL IMPLICATION:
+---------------------------
+The performance gap validates the research approach: This problem is better suited
+for supervised classification (with statistical inference) than anomaly detection.
+However, Isolation Forest still provides complementary interpretability insights
+about what distinguishes subscribers.
+
+================================================================================
+
+✅ Saved interpretation: /Users/anthonyroca/uncc/dsba_6276/final_project/bank-marketing-research/output/anomaly_detection/model_comparison_interpretation.txt
+
+============================================================
+ANALYSIS COMPLETE
+============================================================
+
+All results saved in /Users/anthonyroca/uncc/dsba_6276/final_project/bank-marketing-research/output
+
+Saved plots:
+  Classification:
+    - classification/logistic_regression_confusion_matrix.png
+    - classification/decision_tree_confusion_matrix.png
+    - classification/logistic_regression_shap_summary.png
+    - classification/decision_tree_shap_summary.png
+    - classification/decision_tree_feature_importance.png
+  Anomaly Detection:
+    - anomaly_detection/isolation_forest_shap_summary.png
+    - anomaly_detection/roc_curves_comparison.png
+    - anomaly_detection/logistic_vs_isolation_forest_comparison.png
+
+Saved data:
+  - classification/logistic_significance.csv
+  - classification/tree_importances.csv
+  - anomaly_detection/model_comparison.csv
+  - anomaly_detection/logistic_vs_isolation_forest_comparison.csv
+  - anomaly_detection/model_comparison_interpretation.txt
+  - response_analysis_log_20251103_111059.txt
+
+Analysis completed at: 2025-11-03 11:11:18

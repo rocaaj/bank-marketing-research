@@ -1,0 +1,92 @@
+
+================================================================================
+MODEL COMPARISON INTERPRETATION: Logistic Regression vs Isolation Forest
+================================================================================
+
+EXECUTIVE SUMMARY:
+------------------
+Logistic Regression (ROC-AUC: ~0.75) significantly outperforms Isolation Forest 
+(ROC-AUC: ~0.55) because subscribers represent a distinct, learnable class with 
+systematic patterns, not random anomalies.
+
+KEY FINDINGS:
+-------------
+1. CLASS NATURE: Subscribers (11.7% of data) form a distinct minority class with
+   learnable patterns, not random outliers. This explains why supervised learning
+   (Logistic Regression) outperforms unsupervised anomaly detection.
+
+2. FEATURE AGREEMENT: 9 features appear in top 15 of both models,
+   indicating some consensus on what distinguishes subscribers from non-subscribers.
+
+3. STATISTICAL SIGNIFICANCE: 25 features have statistically significant
+   coefficients (p < 0.05) in Logistic Regression, providing evidence-based insights
+   into subscription predictors.
+
+4. MODEL DIFFERENCES:
+   • Logistic Regression: Identifies statistically significant predictors with 
+     interpretable odds ratios. Captures systematic relationships learned from
+     labeled data.
+   • Isolation Forest: Identifies features that make subscribers "stand out" from
+     the majority class. Captures deviation patterns without explicit labels.
+
+INTERPRETATION FOR BUSINESS:
+----------------------------
+• Use Logistic Regression for actionable insights: Which customer characteristics
+  and campaign strategies statistically predict subscription? (p-values, odds ratios)
+  
+• Use Isolation Forest for exploratory insights: What makes subscribers different
+  from typical customers? (SHAP feature contributions)
+
+• Both models can inform targeting strategies, but Logistic Regression provides
+  stronger, statistically validated evidence for decision-making.
+
+METHODOLOGICAL IMPLICATION:
+---------------------------
+The performance gap validates the research approach: This problem is better suited
+for supervised classification (with statistical inference) than anomaly detection.
+However, Isolation Forest still provides complementary interpretability insights
+about what distinguishes subscribers.
+
+================================================================================
+
+
+DETAILED FEATURE COMPARISON:
+======================================================================
+
+                Feature  Coefficient  AbsCoefficient        p-value  Rank_LR  Significant  OddsRatio  SHAP_Importance  Rank_IF  LR_Normalized  IF_Normalized
+0       contact_unknown    -0.703126        0.703126  1.705900e-116        1         True   0.495035         0.197563      9.0       1.000000       0.694658
+1              campaign    -0.299998        0.299998   2.396394e-24        2         True   0.740820         0.099364     23.0       0.426663       0.349375
+2             month_aug    -0.290440        0.290440   4.108075e-29        3         True   0.747934         0.188727     11.0       0.413070       0.663588
+3           housing_yes    -0.284052        0.284052   3.294337e-43        4         True   0.752728         0.100226     22.0       0.403984       0.352409
+4             month_jul    -0.262086        0.262086   1.065400e-23        5         True   0.769445         0.210574      8.0       0.372744       0.740404
+5             month_nov    -0.239092        0.239092   9.070008e-26        6         True   0.787343         0.167914     13.0       0.340041       0.590406
+6             month_may    -0.185271        0.185271   5.999866e-09        7         True   0.830879         0.157373     14.0       0.263496       0.553343
+7             month_jan    -0.182466        0.182466   1.050859e-19        8         True   0.833213         0.083868     27.0       0.259507       0.294891
+8    education_tertiary     0.166489        0.166489   3.869415e-07        9         True   1.181150         0.195720     10.0       0.236784       0.688176
+9              loan_yes    -0.161652        0.161652   3.050306e-14       10         True   0.850737         0.242410      2.0       0.229905       0.852346
+10            month_mar     0.115395        0.115395   4.975376e-21       11         True   1.122317         0.000000    999.0       0.164117       0.000000
+11            month_oct     0.105968        0.105968   4.622716e-16       12         True   1.111787         0.041591     31.0       0.150710       0.146240
+12            month_sep     0.105473        0.105473   1.115061e-16       13         True   1.111236         0.000000    999.0       0.150006       0.000000
+13      marital_married    -0.102372        0.102372   1.825880e-04       14         True   0.902693         0.220336      6.0       0.145596       0.774730
+14            month_jun     0.100632        0.100632   5.035212e-04       15         True   1.105869         0.221719      5.0       0.143120       0.779591
+15  education_secondary     0.096101        0.096101   1.909585e-03       16         True   1.100870         0.039762     32.0       0.136677       0.139809
+16          job_retired     0.086415        0.086415   2.005058e-05       17         True   1.090258         0.093511     25.0       0.122901       0.328798
+17            month_feb    -0.070323        0.070323   4.306585e-04       18         True   0.932093         0.219155      7.0       0.100014       0.770578
+18        job_housemaid    -0.069261        0.069261   1.403225e-03       19         True   0.933083         0.076749     28.0       0.098504       0.269861
+19            month_dec     0.066903        0.066903   6.086950e-09       20         True   1.069192         0.000000    999.0       0.095151       0.000000
+20      job_blue-collar    -0.062203        0.062203   3.143193e-02       21         True   0.939692         0.231730      3.0       0.088466       0.814792
+21              balance     0.058572        0.058572   6.985550e-05       22         True   1.060321         0.118560     19.0       0.083302       0.416873
+22    contact_telephone    -0.057932        0.057932   7.334028e-04       23         True   0.943714         0.138474     16.0       0.082392       0.486894
+23          job_student     0.053847        0.053847   4.129643e-04       24         True   1.055323         0.107755     20.0       0.076583       0.378880
+24       marital_single     0.046671        0.046671   1.052725e-01       25        False   1.047777         0.126548     17.0       0.066376       0.444958
+25     job_entrepreneur    -0.044595        0.044595   3.817403e-02       26         True   0.956385         0.126502     18.0       0.063424       0.444798
+26          default_yes    -0.040061        0.040061   7.800007e-02       27        False   0.960731         0.055675     30.0       0.056976       0.195761
+27    education_unknown     0.038343        0.038343   5.691143e-02       28        False   1.039088         0.153017     15.0       0.054532       0.538029
+28    job_self-employed    -0.032404        0.032404   1.025369e-01       29        False   0.968116         0.102315     21.0       0.046085       0.359754
+29       job_technician    -0.031932        0.031932   2.016026e-01       30        False   0.968573         0.226360      4.0       0.045414       0.795912
+30         job_services    -0.031543        0.031543   1.762977e-01       31        False   0.968949         0.187452     12.0       0.044862       0.659105
+31                  day     0.030656        0.030656   1.260545e-01       32        False   1.031131         0.095894     24.0       0.043600       0.337175
+32                  age     0.030335        0.030335   1.785423e-01       33        False   1.030800         0.092619     26.0       0.043143       0.325660
+33       job_management    -0.029357        0.029357   3.083828e-01       34        False   0.971070         0.284404      1.0       0.041752       1.000000
+34       job_unemployed     0.012974        0.012974   4.587888e-01       35        False   1.013058         0.060579     29.0       0.018451       0.213005
+35          job_unknown    -0.012589        0.012589   4.806533e-01       36        False   0.987490         0.000000    999.0       0.017904       0.000000

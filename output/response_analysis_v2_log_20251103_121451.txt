@@ -1,0 +1,38 @@
+======================================================================
+Bank Marketing Response Analysis v2 - Supervised Lead Scoring
+======================================================================
+Started at: 2025-11-03 12:14:51
+Log file: /Users/anthonyroca/uncc/dsba_6276/final_project/bank-marketing-research/output/response_analysis_v2_log_20251103_121451.txt
+Random State: 42 | CV Folds: 5 | Optuna Trials: 50
+======================================================================
+
+🔄 Loading dataset from: /Users/anthonyroca/uncc/dsba_6276/final_project/bank-marketing-research/data/bank-full-processed-v2.csv
+✅ Loaded dataset: 45211 rows, 114 columns
+
+🔄 Stratified split (test_size=0.2, random_state=42)...
+✅ Split complete - Train: (36168, 113), Test: (9043, 113)
+📊 Train target distribution: {0: 31937, 1: 4231}
+
+======================================================================
+1. LOGISTIC REGRESSION (Elastic Net)
+======================================================================
+
+===== Logistic Regression (EN) - Metrics =====
+ROC-AUC: 0.9133 | PR-AUC: 0.5389
+Precision@5%: 0.6549 | Precision@10%: 0.5940 | Precision@20%: 0.4530
+Lift@10%: 5.08x
+
+📊 Threshold Optimization Summary:
+   Max ROI threshold: 0.050 (ROI: $96480.00)
+   Max Precision threshold: 0.638 (Precision: 0.669)
+   ~10% contacts threshold: 0.436
+
+🔍 Computing SHAP values for Logistic Regression...
+⚠️  Error computing SHAP for Logistic Regression: property 'feature_names_in_' of 'Pipeline' object has no setter
+💾 Saved model: /Users/anthonyroca/uncc/dsba_6276/final_project/bank-marketing-research/output/classification/models/v2_logistic_model.pkl
+
+======================================================================
+2. LIGHTGBM
+======================================================================
+
+🔧 Tuning LightGBM with Optuna (50 trials)...

@@ -1,0 +1,31 @@
+=== Bank Marketing Response Analysis v2 (Supervised) ===
+Started at: 2025-11-03 11:24:49
+Log file: /Users/anthonyroca/uncc/dsba_6276/final_project/bank-marketing-research/output/response_analysis_v2_log_20251103_112449.txt
+============================================================
+
+🔄 Loading dataset from: /Users/anthonyroca/uncc/dsba_6276/final_project/bank-marketing-research/data/bank-full-processed.csv
+✅ Loaded dataset: 45211 rows, 37 columns
+
+🔄 Stratified split (test_size=0.2, random_state=42)...
+✅ Split complete - Train: (36168, 36), Test: (9043, 36)
+📊 Train target distribution: {0: 31937, 1: 4231}
+
+===== Logistic Regression (Elastic Net) - Metrics =====
+ROC-AUC: 0.7532 | PR-AUC: 0.3293
+Precision@5%: 0.4889 | Precision@10%: 0.4115 | Lift@10%: 3.52
+⚠️  LightGBM not installed. Skipping.
+⚠️  XGBoost not installed. Skipping.
+⚠️  CatBoost not installed. Skipping.
+
+============================================================
+v2 MODEL COMPARISON (sorted by ROC-AUC)
+============================================================
+                   Model  ROC-AUC   PR-AUC  Precision@5%  Precision@10%  Lift@10%    Brier
+Logistic Regression (EN) 0.753246 0.329265      0.488938       0.411504  3.517235 0.199392
+
+All v2 artifacts saved under: /Users/anthonyroca/uncc/dsba_6276/final_project/bank-marketing-research/output/classification
+Saved files (prefix v2_*):
+ - v2_lr_roc.png, v2_lr_pr.png, v2_lr_calibration.png
+ - v2_model_comparison.csv
+
+Completed at: 2025-11-03 11:24:50

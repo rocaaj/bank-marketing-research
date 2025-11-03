@@ -1,0 +1,54 @@
+=== Bank Marketing Response Analysis v2 (Supervised) ===
+Started at: 2025-11-03 11:25:56
+Log file: /Users/anthonyroca/uncc/dsba_6276/final_project/bank-marketing-research/output/response_analysis_v2_log_20251103_112556.txt
+============================================================
+
+🔄 Loading dataset from: /Users/anthonyroca/uncc/dsba_6276/final_project/bank-marketing-research/data/bank-full-processed.csv
+✅ Loaded dataset: 45211 rows, 37 columns
+
+🔄 Stratified split (test_size=0.2, random_state=42)...
+✅ Split complete - Train: (36168, 36), Test: (9043, 36)
+📊 Train target distribution: {0: 31937, 1: 4231}
+
+===== Logistic Regression (Elastic Net) - Metrics =====
+ROC-AUC: 0.7532 | PR-AUC: 0.3293
+Precision@5%: 0.4889 | Precision@10%: 0.4115 | Lift@10%: 3.52
+[LightGBM] [Info] Number of positive: 4231, number of negative: 31937
+[LightGBM] [Info] Auto-choosing row-wise multi-threading, the overhead of testing was 0.001833 seconds.
+You can set `force_row_wise=true` to remove the overhead.
+And if memory is not enough, you can set `force_col_wise=true`.
+[LightGBM] [Info] Total Bins 466
+[LightGBM] [Info] Number of data points in the train set: 36168, number of used features: 36
+[LightGBM] [Info] [binary:BoostFromScore]: pavg=0.116982 -> initscore=-2.021327
+[LightGBM] [Info] Start training from score -2.021327
+
+===== LightGBM - Metrics =====
+ROC-AUC: 0.7924 | PR-AUC: 0.3978
+Precision@5%: 0.5442 | Precision@10%: 0.4845 | Lift@10%: 4.14
+
+===== XGBoost - Metrics =====
+ROC-AUC: 0.7920 | PR-AUC: 0.3980
+Precision@5%: 0.5619 | Precision@10%: 0.4812 | Lift@10%: 4.11
+
+===== CatBoost - Metrics =====
+ROC-AUC: 0.7943 | PR-AUC: 0.3928
+Precision@5%: 0.5420 | Precision@10%: 0.4823 | Lift@10%: 4.12
+
+============================================================
+v2 MODEL COMPARISON (sorted by ROC-AUC)
+============================================================
+                   Model  ROC-AUC   PR-AUC  Precision@5%  Precision@10%  Lift@10%    Brier
+                CatBoost 0.794260 0.392772      0.542035       0.482301  4.122351 0.161460
+                LightGBM 0.792422 0.397849      0.544248       0.484513  4.141260 0.155477
+                 XGBoost 0.791961 0.398006      0.561947       0.481195  4.112896 0.155245
+Logistic Regression (EN) 0.753246 0.329265      0.488938       0.411504  3.517235 0.199392
+
+All v2 artifacts saved under: /Users/anthonyroca/uncc/dsba_6276/final_project/bank-marketing-research/output/classification
+Saved files (prefix v2_*):
+ - v2_lr_roc.png, v2_lr_pr.png, v2_lr_calibration.png
+ - v2_lgb_roc.png, v2_lgb_pr.png, v2_lgb_calibration.png
+ - v2_xgb_roc.png, v2_xgb_pr.png, v2_xgb_calibration.png
+ - v2_cat_roc.png, v2_cat_pr.png, v2_cat_calibration.png
+ - v2_model_comparison.csv
+
+Completed at: 2025-11-03 11:26:05
