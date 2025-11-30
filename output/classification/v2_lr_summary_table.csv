@@ -1,0 +1,16 @@
+Metric,Value,Interpretation,Category
+ROC-AUC,0.9133,Excellent discriminatory ability (91.33%),Performance
+PR-AUC,0.5389,Good precision-recall balance for imbalanced data,Performance
+Precision@10%,0.594,59.4% of top 10% predicted leads actually subscribe,Business
+Lift@10%,5.08,5.08x better than random targeting in top decile,Business
+Optimal Threshold (Max ROI),0.05,ROI: $96480.00 | Precision: 30.1%,Threshold
+Feature: duration,1.5781907215437518,Increases odds (4.85x more likely),Feature
+Feature: poutcome_success,0.4497476916709516,Increases odds (1.57x more likely),Feature
+Feature: contact_unknown,-0.41362863484861845,Decreases odds (1.51x less likely),Feature
+Feature: housing_yes,-0.392886516764969,Decreases odds (1.48x less likely),Feature
+Feature: age,0.36891742201343125,Increases odds (1.45x more likely),Feature
+Feature: age_group,-0.3605080390228621,Decreases odds (1.43x less likely),Feature
+Feature: month_contact_may_unknown,-0.33051037492696594,Decreases odds (1.39x less likely),Feature
+Feature: month_may,-0.29829970509688697,Decreases odds (1.35x less likely),Feature
+Feature: balance_log,0.24396404596530627,Increases odds (1.28x more likely),Feature
+Feature: month_contact_jun_unknown,-0.23169063292051703,Decreases odds (1.26x less likely),Feature
